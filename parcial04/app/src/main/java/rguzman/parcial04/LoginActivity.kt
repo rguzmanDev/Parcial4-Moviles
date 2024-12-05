@@ -35,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.login_button)
         val registerButton = findViewById<Button>(R.id.register_button)
         val googleSignInButton = findViewById<Button>(R.id.google_sign_in_button)
-        val showPasswordButton = findViewById<Button>(R.id.show_password_button)
         rememberMeCheckbox = findViewById(R.id.remember_me_checkbox)
 
         loadCredentials()
@@ -54,17 +53,6 @@ class LoginActivity : AppCompatActivity() {
 
         googleSignInButton.setOnClickListener {
             signInWithGoogle()
-        }
-
-        showPasswordButton.setOnClickListener {
-            if (passwordEditText.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                showPasswordButton.text = "Mostrar"
-            } else {
-                passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                showPasswordButton.text = "Ocultar"
-            }
-            passwordEditText.setSelection(passwordEditText.text.length)
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
