@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">parcial04</string>
+    <string-array name="prioridad_array">
+        <item>Baja</item>
+        <item>Normal</item>
+        <item>Alta</item>
+    </string-array>
+    <string-array name="estado_array">
+        <item>Pendiente</item>
+        <item>En proceso</item>
+        <item>Terminado</item>
+    </string-array>
+    <string-array name="order_options">
+        <item>Título</item>
+        <item>Prioridad</item>
+        <item>Estado</item>
+    </string-array>
+</resources>
