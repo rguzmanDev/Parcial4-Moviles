@@ -3,7 +3,6 @@ package rguzman.parcial04
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.GoogleAuthProvider
@@ -116,8 +116,8 @@ class LoginActivity : AppCompatActivity() {
 
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            if (task.isSuccessful) {
-                val account = task.result
+            try {
+                val account = task.getResult(ApiException::class.java)!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 auth.signInWithCredential(credential)
                     .addOnCompleteListener(this) { authTask ->
@@ -129,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this, "Google sign-in failed.", Toast.LENGTH_SHORT).show()
                         }
                     }
-            } else {
+            } catch (e: ApiException) {
                 Toast.makeText(this, "Google sign-in failed.", Toast.LENGTH_SHORT).show()
             }
         }
